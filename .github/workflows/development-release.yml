@@ -6,22 +6,23 @@ on:
       - develop
       
 jobs:
-  deleteRelease:
-    name: delete old development Release
-    runs-on: ubuntu-latest
-    steps:
-    - uses: dev-drprasad/delete-tag-and-release@v1.0
-      with:
-        tag_name: development 
-        github_token: ${{ secrets.GITHUB_TOKEN }} 
+  #deleteRelease:
+  #  name: delete old development Release
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - uses: dev-drprasad/delete-tag-and-release@v1.0
+  #   with:
+  #     tag_name: development 
+  #      github_token: ${{ secrets.GITHUB_TOKEN }} 
       
   publish:
-    needs: deleteRelease
+    # needs: deleteRelease
     name: Publish
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Upload Application
+      # uses: svenstaro/upload-release-action@v2.5 # cant be used now as it does not support other branches than default branch
       uses: Spikatrix/upload-release-action@b713c4b73f0a8ddda515820c124efc6538685492
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
