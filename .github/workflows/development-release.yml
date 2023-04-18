@@ -53,4 +53,4 @@ jobs:
         tag: development
         release_name: Automatic Development Build
         body: |
-          ${{ needs.log.outputs.RELEASE_BODY }}  # <--- Use environment variables that was created earlier
+          ${{ needs.log.outputs.RELEASE_BODY }}
