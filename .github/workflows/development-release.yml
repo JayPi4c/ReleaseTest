@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Upload Application
-      uses: svenstaro/upload-release-action@v2
+      uses: Spikatrix/upload-release-action@b713c4b
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
