@@ -14,10 +14,11 @@ jobs:
     - name: Delete Release
       uses: larryjoelane/delete-release-action@v1.0.24
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         release_name: Automatic Development Build
       
   publish:
+    needs: deleteRelease
     name: Publish
     runs-on: ubuntu-latest
     steps:
