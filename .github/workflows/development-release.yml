@@ -10,6 +10,7 @@ jobs:
     name: get the git log for this release
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: |
           r=$(git log --oneline --no-merges development..HEAD)
           echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
