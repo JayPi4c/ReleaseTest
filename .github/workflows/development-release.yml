@@ -7,15 +7,15 @@ on:
       
 jobs:
   deleteRelease:
-  name: delete old development Release
-  runs-on: ubuntu-latest
-  steps:
-  - uses: actions/checkout@v2
-  - name: Delete Release
-    uses: larryjoelane/delete-release-action@v1.0.24
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      release_name: Automatic Development Build
+    name: delete old development Release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Delete Release
+      uses: larryjoelane/delete-release-action@v1.0.24
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        release_name: Automatic Development Build
       
   publish:
     name: Publish
