@@ -10,7 +10,6 @@ jobs:
     name: delete old development Release
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - uses: dev-drprasad/delete-tag-and-release@v0.2.1
       with:
         tag_name: development 
