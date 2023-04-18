@@ -17,8 +17,11 @@ jobs:
           fetch-depth: 0
       - id: log
         run: |
-          r=$(git log --oneline --no-merges development..HEAD)
-          echo "RELEASE_BODY=$r" >> "$GITHUB_OUTPUT"        # <--- Set environment variable
+
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo -n "RELEASE_BODY<<$EOF" >> $GITHUB_OUTPUT
+          echo -n "$(git log --oneline --no-merges development..HEAD)" >> "$GITHUB_OUTPUT"        # <--- Set environment variable
+          echo -n "$EOF" >> $GITHUB_OUTPUT
     
   deleteRelease:
     needs: log
