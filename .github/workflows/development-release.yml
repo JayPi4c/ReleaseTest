@@ -12,7 +12,8 @@ jobs:
     run: |
       r=$(git log --oneline --no-merges development..HEAD)
       echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
-
+    outputs:
+      RELEASE_BODY: ${{ steps.log.outputs.RELEASE_BODY }} # <--- Use environment variable
   deleteRelease:
     needs: log
     name: delete old development release
@@ -24,7 +25,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }} 
       
   publish:
-    needs: deleteRelease
+    needs: [log, deleteRelease]
     name: Publish
     runs-on: ubuntu-latest
     steps:
@@ -43,4 +44,4 @@ jobs:
         tag: development
         release_name: Automatic Development Build
         body: |
-          ${{ steps.read_release.outputs.RELEASE_BODY }}  # <--- Use environment variables that was created earlier
+          ${{ needs.log.outputs.RELEASE_BODY }}  # <--- Use environment variables that was created earlier
