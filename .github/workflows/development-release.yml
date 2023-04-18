@@ -22,11 +22,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Upload Application
-      uses: Spikatrix/upload-release-action@b713c4b
+      uses: Spikatrix/upload-release-action@b713c4b73f0a8ddda515820c124efc6538685492
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
+        target_commit: develop
         file: test.txt
         prerelease: true
         overwrite: true
