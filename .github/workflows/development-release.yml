@@ -15,7 +15,7 @@ jobs:
       uses: larryjoelane/delete-release-action@v1.0.24
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        release_name: Automatic Development Build
+        release-name: Automatic Development Build
       
   publish:
     needs: deleteRelease
