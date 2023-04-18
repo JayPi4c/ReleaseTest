@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       shell: bash
-      run: |
+    - run: |
         r=$(git log --oneline --no-merges development..HEAD)
         echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
       outputs:
