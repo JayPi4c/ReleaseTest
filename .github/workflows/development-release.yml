@@ -8,12 +8,16 @@ on:
 jobs:
   log:
     name: get the git log for this release
-    shell: bash
-    run: |
-      r=$(git log --oneline --no-merges development..HEAD)
-      echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
-    outputs:
-      RELEASE_BODY: ${{ steps.log.outputs.RELEASE_BODY }} # <--- Use environment variable
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      shell: bash
+      run: |
+        r=$(git log --oneline --no-merges development..HEAD)
+        echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
+      outputs:
+        RELEASE_BODY: ${{ steps.log.outputs.RELEASE_BODY }} # <--- Use environment variable
+  
   deleteRelease:
     needs: log
     name: delete old development release
