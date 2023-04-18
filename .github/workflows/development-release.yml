@@ -9,16 +9,17 @@ jobs:
   log:
     name: get the git log for this release
     runs-on: ubuntu-latest
+    outputs:
+      RELEASE_BODY: ${{ steps.log.outputs.RELEASE_BODY }} # <--- Use environment variable
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: |
+      - id: log
+        run: |
           r=$(git log --oneline --no-merges development..HEAD)
-          echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
-    outputs:
-      RELEASE_BODY: ${{ steps.log.outputs.RELEASE_BODY }} # <--- Use environment variable
-  
+          echo "RELEASE_BODY=$r" >> "$GITHUB_OUTPUT"        # <--- Set environment variable
+    
   deleteRelease:
     needs: log
     name: delete old development release
